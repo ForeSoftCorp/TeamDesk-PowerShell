@@ -122,7 +122,7 @@ function Try-ConvertData {
 			}
 			break;
 		}
-	   "Timestamp" {
+		"Timestamp" {
 			[DateTimeOffset]$dtResult = [DateTimeOffset]::MinValue
 			if([DateTimeOffset]::TryParse($data, $cultureObj, 0, [ref]$dtResult)) {
 				return $dtResult.ToString("yyyy-MM-ddTHH:mm:sszzz");
@@ -143,33 +143,33 @@ function Try-ConvertData {
 			}
 			break;
 		}
-        "EMail" {
-            try {
-                $m = [MailAddress]$data
-                return $m.Address
-            } catch {
-            }
-            break;
-        }
-        "User" {
-            try {
-                $m = [MailAddress]$data
-                return $m.ToString()
-            } catch {
-            }
-            break;
-        }
-        "URL" {
-            [Uri]$uriResult
-            if($data -imatch "https?://" -and [Uri]::TryCreate($data, [UriKind]::Absolute, [ref]$uriResult)) {
-                return $data;
-            }
-            break;
-        }
+        	"EMail" {
+			try {
+				$m = [MailAddress]$data
+				return $m.Address
+		    	} catch {
+		    	}
+		    	break;
+        	}
+		"User" {
+			try {
+				$m = [MailAddress]$data
+				return $m.ToString()
+		    	} catch {
+		    	}
+		    	break;
+		}
+		"URL" {
+			[Uri]$uriResult
+			if($data -imatch "https?://" -and [Uri]::TryCreate($data, [UriKind]::Absolute, [ref]$uriResult)) {
+				return $data;
+		   	}
+		    	break;
+		}
 		default {
-            if($cdef.width -and $data.Length -gt $cdef.width) {
-                throw "Text exceeds maximum length of $($cdef.width) characters"
-            }
+			if($cdef.width -and $data.Length -gt $cdef.width) {
+				throw "Text exceeds maximum length of $($cdef.width) characters"
+		    	}
 			return $data
 		}
 	}
@@ -257,7 +257,7 @@ Import-Csv -Path $File -Delimiter $Delimiter -Encoding $Encoding -Header $csvhea
 Select -Skip $Skip |
 # Split the data by 500 record batches
 % {
-    $buffer = New-Object Collections.ArrayList(5)
+    $buffer = New-Object Collections.ArrayList(500)
 } {
     [void]$buffer.Add($_)
     if($buffer.Count -eq $buffer.Capacity) {
