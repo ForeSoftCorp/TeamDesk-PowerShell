@@ -19,8 +19,8 @@ Imports data from CSV file into TeamDesk
 : The name of the table in singular form to import data to
 
 `-c`, `-Columns`
-: An array of column names in database to import data to. use "x" to ignore column in the file. For example
-`-c "First Name",x,"Last Name"`
+: An array of column names in database to import data to. use "x" to ignore column in the file. 
+For example `-c "First Name",x,"Last Name"`
 
 `-w`, `-Workflow`
 : Switch. Whether to run workflow rules for each imported record. Default is false - do not run - requires Manage Data setup privilege from the user.
