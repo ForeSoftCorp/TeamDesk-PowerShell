@@ -70,7 +70,7 @@ function Invoke-TeamDeskAPI {
     try {
         $table = [Uri]::EscapeDataString($table.Replace("%", "%25").Replace("/", "%2F").Replace("\\", "%5C").Replace("?", "%3F"));
 		$params = @{ Uri = "$baseUrl/$table/$method"; Headers = @{ "Authorization" = $auth } }
-		if($body -ne "") { $params.Method = "Post"; $params.ContentType = "application/json"; $params.Body = $body }
+		if($body -ne "") { $params.Method = "Post"; $params.ContentType = "application/json;charset=utf-8"; $params.Body = $body }
 		return Invoke-RestMethod @params
 	} catch {
 		$e = [string]$_
