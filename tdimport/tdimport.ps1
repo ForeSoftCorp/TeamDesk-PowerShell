@@ -138,7 +138,7 @@ function Try-ConvertData {
 		}
 		"Numeric" {
 			[Decimal]$dcResult = [Decimal]::MinValue
-			if([Decimal]::TryParse($data, [ref]$dcResult)) {
+			if([Decimal]::TryParse($data, 511, $cultureObj, [ref]$dcResult)) {
 				return $dcResult;
 			}
 			break;
